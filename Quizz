@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>QCM de Physique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f0f0f0;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            width: 300px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+        .option:hover {
+            background-color: #45a049;
+        }
+        #result {
+            font-size: 22px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>QCM de Physique</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            { question: "Quel est l'état de la matière qui possède un volume et une forme définis ?", options: ["Solide", "Liquide", "Gaz", "Plasma"], correct: "Solide" },
+            { question: "Qu'est-ce que l'énergie cinétique ?", options: ["L'énergie d'un objet en mouvement", "L'énergie d'un objet au repos", "L'énergie électrique", "L'énergie thermique"], correct: "L'énergie d'un objet en mouvement" },
+            { question: "Quel est le nom du phénomène qui consiste à changer l'état d'un corps solide en liquide ?", options: ["Fusion", "Solidification", "Évaporation", "Condensation"], correct: "Fusion" },
+            { question: "Laquelle de ces forces est une force de contact ?", options: ["Gravité", "Électromagnétisme", "Frottement", "Attraction gravitationnelle"], correct: "Frottement" },
+            { question: "Quelle est l'unité de la masse ?", options: ["Kilogramme", "Mètre", "Seconde", "Joule"], correct: "Kilogramme" },
+            { question: "Quel est le principe de la loi de la réflexion de la lumière ?", options: ["L'angle d'incidence est égal à l'angle de réflexion", "L'angle d'incidence est plus grand que l'angle de réflexion", "La lumière traverse toujours les matériaux", "L'angle de réflexion est nul"], correct: "L'angle d'incidence est égal à l'angle de réflexion" },
+            { question: "L'électricité statique est causée par :", options: ["Un excès ou un manque d'électrons", "La friction de deux aimants", "Le mouvement des charges électriques dans un fil", "La présence d'un champ magnétique"], correct: "Un excès ou un manque d'électrons" },
+            { question: "Lequel de ces éléments n'est pas un conducteur d'électricité ?", options: ["Cuivre", "Plastique", "Aluminium", "Or"], correct: "Plastique" },
+            { question: "Quelle est l'unité de la température ?", options: ["Kelvin", "Joule", "Pascal", "Volt"], correct: "Kelvin" },
+            { question: "Qu'est-ce qu'un circuit en série ?", options: ["Les composants sont disposés sur des branches parallèles", "Les composants sont connectés de manière à ce qu'il y ait un seul chemin pour le courant", "Les composants sont disposés en cercle", "Les composants sont tous alimentés indépendamment"], correct: "Les composants sont connectés de manière à ce qu'il y ait un seul chemin pour le courant" }
+        ];
+
+        let index = 0;
+        let score = 0;
+
+        function showQuestion() {
+            if (index < questions.length) {
+                document.getElementById("question").textContent = questions[index].question;
+                const optionsDiv = document.getElementById("options");
+                optionsDiv.innerHTML = "";
+                questions[index].options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.className = "option";
+                    button.onclick = () => checkAnswer(option);
+                    optionsDiv.appendChild(button);
+                });
+            } else {
+                document.getElementById("question").textContent = "QCM terminé !";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("result").textContent = `Votre score est : ${score}/${questions.length}`;
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === questions[index].correct) {
+                score++;
+            }
+            index++;
+            showQuestion();
+        }
+
+        showQuestion();
+    </script>
+
+</body>
+</html>
